@@ -1,8 +1,9 @@
+import Banner from 'components/Banner';
+import Images from 'constants/images';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from 'reactstrap';
-import Images from '../../../../constants/images';
-import Banner from '../../../../components/Banner';
+
 
 MainPage.propTypes = {};
 

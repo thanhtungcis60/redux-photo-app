@@ -1,6 +1,6 @@
 # Mini Project: Photo App
 
-## Setup environment 
+## Setup environment
 
 Github Project: https://github.com/paulnguyen-mn/redux-photo-app
 
@@ -14,7 +14,7 @@ Github Project: https://github.com/paulnguyen-mn/redux-photo-app
 npm i --save-dev node-sass
 ```
 
-### 3. Add react router 
+### 3. Add react router
 
 ```
 npm i --save react-router-dom
@@ -26,6 +26,9 @@ npm i --save react-router-dom
 npm i --save reactstrap
 ```
 
+### 4. Other
+
+#npm i --save react-select
 
 ## Tổ chức folder
 
@@ -33,7 +36,7 @@ npm i --save reactstrap
 src
 |__ assets
 |  |__ images
-|  |__ styles (global styles) 
+|  |__ styles (global styles)
 |
 |__ components (shared components)
 |
@@ -67,6 +70,6 @@ function App() {
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
-  )
+  );
 }
 ```

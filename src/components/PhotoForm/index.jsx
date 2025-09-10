@@ -7,6 +7,7 @@ import Images from 'constants/images';
 import { Formik, Form, FastField } from 'formik';
 import InputField from 'custom-fields/InputField';
 import SelectField from 'custom-fields/SelectField';
+import RandomPhotoField from 'custom-fields/RandomPhotoField';
 
 PhotoForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -53,7 +54,8 @@ function PhotoForm(props) {
         //         <Button color="primary">Add to album</Button>
         //     </FormGroup>
         // </Form>
-        <Formik initialValues={initialValues}>
+        <Formik initialValues={initialValues}
+            onSubmit={values => console.log('Form submit', values)}>
             {formikProps => {
                 const { values, errors, touched } = formikProps;
                 console.log({ values, errors, touched });
@@ -73,18 +75,14 @@ function PhotoForm(props) {
                             placeholder="What's your photo category?"
                             options={PHOTO_CATEGORY_OPTIONS} />
 
-                        <FormGroup>
-                            <Label for="categoryId">Photo</Label>
-                            <div>
-                                <Button type="button" outline color="primary">Random a photo</Button>
-                            </div>
-                            <div>
-                                <img width="200px" height="200px" src={Images.COLORFUL_BG} alt="colorful" />
-                            </div>
-                        </FormGroup>
+                        <FastField
+                            name="photo"
+                            component={RandomPhotoField}
+
+                            label="Photo" />
 
                         <FormGroup>
-                            <Button color="primary">Add to album</Button>
+                            <Button type="submit" color="primary">Add to album</Button>
                         </FormGroup>
                     </Form>
                 );

@@ -30,6 +30,8 @@ npm i --save reactstrap
 
 #npm i --save react-select
 #npx yarn add yup
+#npx yarn add @reduxjs/toolkit react-redux
+#npx yarn add react-redux@7.2.9
 
 ## Tổ chức folder
 

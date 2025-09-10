@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Select from 'react-select';
-import { Button, Input, FormGroup, Label } from 'reactstrap';
+import { Button, Input, FormGroup, Label, Spinner } from 'reactstrap';
 import { PHOTO_CATEGORY_OPTIONS } from 'constants/global';
 import Images from 'constants/images';
 import { Formik, Form, FastField } from 'formik';
@@ -29,16 +29,16 @@ function PhotoForm(props) {
         categoryId: Yup.number().required('This field is required.').nullable(),
         photo: Yup.string().when('categoryId', {
             is: 1,
-            then: Yup.string().required('This field is required.'),
-            otherwise: Yup.string().notRequired(),
+            then: (s) => s.required('This field is required.'),
+            otherwise: (s) => s.notRequired(),
         })
     });
     return (
         <Formik initialValues={initialValues}
-            onSubmit={values => console.log('Form submit', values)}
+            onSubmit={props.onSubmit}
             validationSchema={validationSchema}>
             {formikProps => {
-                const { values, errors, touched } = formikProps;
+                const { values, errors, touched, isSubmitting } = formikProps;
                 console.log({ values, errors, touched });
                 return (
                     <Form>
@@ -63,7 +63,7 @@ function PhotoForm(props) {
                             label="Photo" />
 
                         <FormGroup>
-                            <Button type="submit" color="primary">Add to album</Button>
+                            <Button type="submit" color="primary">{isSubmitting && <Spinner size="sm" />}Add to album</Button>
                         </FormGroup>
                     </Form>
                 );

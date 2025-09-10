@@ -29,6 +29,7 @@ npm i --save reactstrap
 ### 4. Other
 
 #npm i --save react-select
+#npx yarn add yup
 
 ## Tổ chức folder
 

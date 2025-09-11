@@ -21,7 +21,7 @@ InputField.defaultProps = {
 };
 
 function InputField({ field, form,
-    type, label, placeholder, disabled }) {
+    type, label, placeholder, disabled, hidden }) {
     const { name, value, onChange, onBlur } = field;
     const { errors, touched } = form;
     const showError = errors[name] && touched[name];
@@ -36,7 +36,8 @@ function InputField({ field, form,
                 onBlur={onBlur}
                 placeholder={placeholder}
                 disabled={disabled}
-                invalid={showError} />
+                invalid={showError}
+                hidden={hidden} />
             {/* {showError && <FormFeedback>{errors[name]}</FormFeedback>} */}
             <ErrorMessage name={name} component={FormFeedback} />
         </FormGroup>

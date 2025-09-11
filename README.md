@@ -32,6 +32,7 @@ npm i --save reactstrap
 #npx yarn add yup
 #npx yarn add @reduxjs/toolkit react-redux
 #npx yarn add react-redux@7.2.9
+#npx yarn add query-string@8.1.0
 
 ## Tổ chức folder
 

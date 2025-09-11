@@ -9,6 +9,8 @@ import InputField from 'custom-fields/InputField';
 import SelectField from 'custom-fields/SelectField';
 import RandomPhotoField from 'custom-fields/RandomPhotoField';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 PhotoForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -19,11 +21,7 @@ PhotoForm.defaultProps = {
 };
 
 function PhotoForm(props) {
-    const initialValues = {
-        title: '',
-        categoryId: null,
-        photo: ''
-    };
+    const initialValues = props.initialValues;
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('This field is required.'),
         categoryId: Yup.number().required('This field is required.').nullable(),
@@ -39,9 +37,13 @@ function PhotoForm(props) {
             validationSchema={validationSchema}>
             {formikProps => {
                 const { values, errors, touched, isSubmitting } = formikProps;
-                console.log({ values, errors, touched });
+                // console.log({ values, errors, touched });
                 return (
                     <Form>
+                        <FastField
+                            name="id"
+                            component={InputField}
+                            hidden="hidden" />
                         <FastField
                             name="title"
                             component={InputField}
@@ -63,7 +65,7 @@ function PhotoForm(props) {
                             label="Photo" />
 
                         <FormGroup>
-                            <Button type="submit" color="primary">{isSubmitting && <Spinner size="sm" />}Add to album</Button>
+                            <Button type="submit" color="primary">{isSubmitting && <Spinner size="sm" />} {initialValues !== 0 ? 'Update' : 'Add to album'}</Button>
                         </FormGroup>
                     </Form>
                 );

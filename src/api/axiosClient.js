@@ -6,34 +6,21 @@ import queryString from "query-string";
 
 const getFirebaseToken = async () => {
   const currentUser = getAuth().currentUser;
-  console.log("[AXIOS] currentUser: ", currentUser);
   if (currentUser) {
     const token = await currentUser.getIdToken();
     return token;
   }
 
-  //Not logged in
-  const hasRememberAccount = localStorage.getItem(
-    "firebase::rememberedAccounts"
-  );
-  console.log("[AXIOS] hasRememberAccount: ", hasRememberAccount);
-  if (!hasRememberAccount) return null;
-
-  //Logged in byt currentUser is not fetched --> wait 10s
+  //Logged in but currentUser is not fetched --> wait 10s
   return new Promise((resolve, reject) => {
-    const waitTimer = setTimeout(() => {
-      console.log("[AXIOS] Waited 10s, but still no user");
-      reject(null);
-    }, 10000);
     const unregister = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         reject(null);
       }
       const token = await user.getIdToken();
-      console.log("[AXIOS] User token: ", token);
+      //   console.log("[AXIOS] User token: ", token);
       resolve(token);
       unregister();
-      clearTimeout(waitTimer);
     });
   });
 };

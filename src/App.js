@@ -8,6 +8,9 @@ import Headers from "./components/Header";
 import NotFound from "./components/NotFound";
 import { auth } from "./firebaseConfig";
 import { Button } from "reactstrap";
+import { useDispatch } from "react-redux";
+import { getMe } from "app/userSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 // Lazy load - Code splitting
 const Photo = React.lazy(() => import("./features/Photo"));
@@ -15,6 +18,7 @@ const Photo = React.lazy(() => import("./features/Photo"));
 function App() {
   const [productList, setProductList] = useState([]);
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+  const dispatch = useDispatch();
 
   const handleFetchProductList = async () => {
     try {
@@ -52,6 +56,16 @@ function App() {
       // console.log("User is signed in", user.displayName);
       // const token = await user.getIdToken();
       // console.log("User token: ", token);
+
+      //getme when signed in
+      try {
+        const action = getMe();
+        const actionResult = await dispatch(action);
+        const currentUser = unwrapResult(actionResult);
+        console.log("[App]Current user: ", currentUser);
+      } catch (error) {
+        console.log("Failed to fetch current user: ", error.message);
+      }
     });
     return unregister; // cleanup
   }, []);

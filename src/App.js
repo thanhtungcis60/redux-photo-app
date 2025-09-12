@@ -26,19 +26,19 @@ function App() {
       console.log("Failed to fetch product list: ", error.message);
     }
   };
-  // useEffect(() => {
-  //   const fetchProductList = async () => {
-  //     try {
-  //       const params = { _page: 1, _limit: 10 };
-  //       const response = await productApi.getAll(params);
-  //       console.log("Fetch products successfully: ", response);
-  //       setProductList(response.data);
-  //     } catch (error) {
-  //       console.log("Failed to fetch product list: ", error.message);
-  //     }
-  //   };
-  //   fetchProductList();
-  // }, []);
+  useEffect(() => {
+    const fetchProductList = async () => {
+      try {
+        const params = { _page: 1, _limit: 10 };
+        const response = await productApi.getAll(params);
+        console.log("Fetch products successfully: ", response);
+        setProductList(response.data);
+      } catch (error) {
+        console.log("Failed to fetch product list: ", error.message);
+      }
+    };
+    fetchProductList();
+  }, []);
 
   // Listen to the Firebase Auth state and set the local state.
   useEffect(() => {
@@ -49,9 +49,9 @@ function App() {
         return;
       }
       // handle signed in
-      console.log("User is signed in", user.displayName);
-      const token = await user.getIdToken();
-      console.log("User token: ", token);
+      // console.log("User is signed in", user.displayName);
+      // const token = await user.getIdToken();
+      // console.log("User token: ", token);
     });
     return unregister; // cleanup
   }, []);

@@ -34,6 +34,8 @@ npm i --save reactstrap
 #npx yarn add react-redux@7.2.9
 #npx yarn add query-string@8.1.0
 #npx yarn add axios
+#npm install --save react-firebaseui
+#npm install --save firebase
 
 ## Tổ chức folder
 
